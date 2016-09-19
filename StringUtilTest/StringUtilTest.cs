@@ -9,8 +9,7 @@ namespace StringUtilTestNS
     public class StringUtilTest
     {
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void IndexOf_SubLongerThanText_ShouldThrowException()
+        public void IndexOf_SubLongerThanText_ShouldReturnNegOne()
         {
             //arrange
             string text = "This is the main string";
@@ -19,14 +18,13 @@ namespace StringUtilTestNS
 
             //act
             var index = util.IndexOf(text, subText);
-            
+
             //assert
-            //handled by exception
+            Assert.AreEqual(-1, index);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void IndexOf_TextIsNullOrEmpty_ShouldThrowArgumentException()
+        public void IndexOf_TextIsNullOrEmpty_ShouldReturnNegOne()
         {
             //arrange
             string text = "";
@@ -37,12 +35,11 @@ namespace StringUtilTestNS
             var index = util.IndexOf(text, subText);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(-1, index);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void IndexOf_SubTextIsNullOrEmpty_ShouldThrowArgumentException()
+        public void IndexOf_SubTextIsNullOrEmpty_ShouldReturnNegOne()
         {
             //arrange
             string text = "This is the main string";
@@ -53,12 +50,11 @@ namespace StringUtilTestNS
             var index = util.IndexOf(text, subText);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(-1, index);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void IndexOf_IndexIsMoreThanTextLength_ShouldThrowIndexOutOfRangeException()
+        public void IndexOf_IndexIsMoreThanTextLength_ShouldReturnNegOne()
         {
             //arrange
             string text = "Polly put the kettle on, polly put the kettle on, polly put the kettle on we'll all have tea";
@@ -69,11 +65,10 @@ namespace StringUtilTestNS
             var index = util.IndexOf(text, subText, 100);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(-1, index);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
         public void IndexOf_IndexPlusSubTextLengthIsMoreThanTextLength_ShouldThrowIndexOutOfRangeException()
         {
             //arrange
@@ -85,7 +80,7 @@ namespace StringUtilTestNS
             var index = util.IndexOf(text, subText, 92);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(-1, index);
         }
 
         [TestMethod]
@@ -285,8 +280,7 @@ namespace StringUtilTestNS
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void IndexesOf_SubLongerThanText_ShouldThrowException()
+        public void IndexesOf_SubLongerThanText_ShouldReturnBlankList()
         {
             //arrange
             string text = "This is the main string";
@@ -294,15 +288,14 @@ namespace StringUtilTestNS
             var util = new StringUtil();
 
             //act
-            var index = util.IndexesOf(text, subText);
+            var indexes = util.IndexesOf(text, subText);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(0, indexes.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void IndexesOf_TextIsNullOrEmpty_ShouldThrowArgumentException()
+        public void IndexesOf_TextIsNullOrEmpty_ShouldReturnBlankList()
         {
             //arrange
             string text = "";
@@ -313,12 +306,11 @@ namespace StringUtilTestNS
             var indexes = util.IndexesOf(text, subText);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(0, indexes.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void IndexesOf_SubTextIsNullOrEmpty_ShouldThrowArgumentException()
+        public void IndexesOf_SubTextIsNullOrEmpty_ShouldReturnBlankList()
         {
             //arrange
             string text = "This is the main string";
@@ -329,7 +321,7 @@ namespace StringUtilTestNS
             var indexes = util.IndexesOf(text, subText);
 
             //assert
-            //handled by exception
+            Assert.AreEqual(0, indexes.Count);
         }
 
         [TestMethod]
@@ -389,6 +381,43 @@ namespace StringUtilTestNS
             CollectionAssert.AreEqual(expectedIndexes, indexes);
         }
 
-        
+        [TestMethod]
+        public void IndexesOf_SubTextFoundSameValuesCaseSensitive_ShouldReturn3Items()
+        {
+            //arrange
+            string text = "ABcd";
+            string subText = "ABcd";
+
+            List<int> expectedIndexes = new List<int>();
+            expectedIndexes.Add(1);
+
+            var util = new StringUtil();
+
+            //act
+            var indexes = util.IndexesOf(text, subText);
+
+            //assert
+            CollectionAssert.AreEqual(expectedIndexes, indexes);
+        }
+
+        [TestMethod]
+        public void IndexesOf_SubTextFoundSameValuesCaseInsensitive_ShouldReturn3Items()
+        {
+            //arrange
+            string text = "ABCD";
+            string subText = "abcd";
+
+            List<int> expectedIndexes = new List<int>();
+            expectedIndexes.Add(1);
+
+            var util = new StringUtil();
+
+            //act
+            var indexes = util.IndexesOf(text, subText);
+
+            //assert
+            CollectionAssert.AreEqual(expectedIndexes, indexes);
+        }
+
     }
 }

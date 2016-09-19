@@ -18,16 +18,16 @@ namespace StringUtilNS
         public int IndexOf(string text, string subText, int startIndex = 0)
         {
             if (string.IsNullOrEmpty(text))
-                throw new ArgumentException("Text is null or empty.", "text");
+                return -1;
 
             if (string.IsNullOrEmpty(subText))
-                throw new ArgumentException("Sub Text is null or empty.", "subText");
+                return -1;
 
             if (subText.Length > text.Length)
-                throw new Exception("Sub Text should not be longer than the main text.");
+                return -1;
 
             if (startIndex + subText.Length > text.Length)
-                throw new IndexOutOfRangeException("Index will be out of range. Start Index + subText length.");
+                return -1;
 
             bool match;
 
@@ -56,16 +56,16 @@ namespace StringUtilNS
         /// <returns></returns>
         public List<int> IndexesOf(string text, string subText)
         {
+            List<int> indexes = new List<int>();
             if (string.IsNullOrEmpty(text))
-                throw new ArgumentException("Text is null or empty.", "text");
+                return indexes;
 
             if (string.IsNullOrEmpty(subText))
-                throw new ArgumentException("Sub Text is null or empty.", "subText");
+                return indexes;
 
             if (subText.Length > text.Length)
-                throw new Exception("Sub Text should not be longer than the main text.");
+                return indexes;
 
-            List<int> indexes = new List<int>();
             for (int index = 0; ; index += subText.Length)
             {
                 index = this.IndexOf(text, subText, index);
