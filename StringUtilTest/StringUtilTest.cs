@@ -382,7 +382,7 @@ namespace StringUtilTestNS
         }
 
         [TestMethod]
-        public void IndexesOf_SubTextFoundSameValuesCaseSensitive_ShouldReturn3Items()
+        public void IndexesOf_SubTextFoundSameValuesCaseSensitive_ShouldReturn1Item()
         {
             //arrange
             string text = "ABcd";
@@ -401,7 +401,7 @@ namespace StringUtilTestNS
         }
 
         [TestMethod]
-        public void IndexesOf_SubTextFoundSameValuesCaseInsensitive_ShouldReturn3Items()
+        public void IndexesOf_SubTextFoundSameValuesCaseInsensitive_ShouldReturn1Item()
         {
             //arrange
             string text = "ABCD";
@@ -420,7 +420,7 @@ namespace StringUtilTestNS
         }
 
         [TestMethod]
-        public void IndexesOf_SubTextFoundABCDCaseInsensitive_ShouldReturn3Items()
+        public void IndexesOf_SubTextFoundABCDCaseInsensitive_ShouldReturn1Item()
         {
             //arrange
             string text = "ABCD";
