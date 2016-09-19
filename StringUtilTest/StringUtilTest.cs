@@ -419,5 +419,24 @@ namespace StringUtilTestNS
             CollectionAssert.AreEqual(expectedIndexes, indexes);
         }
 
+        [TestMethod]
+        public void IndexesOf_SubTextFoundABCDCaseInsensitive_ShouldReturn3Items()
+        {
+            //arrange
+            string text = "ABCD";
+            string subText = "cd";
+
+            List<int> expectedIndexes = new List<int>();
+            expectedIndexes.Add(3);
+
+            var util = new StringUtil();
+
+            //act
+            var indexes = util.IndexesOf(text, subText);
+
+            //assert
+            CollectionAssert.AreEqual(expectedIndexes, indexes);
+        }
+
     }
 }
