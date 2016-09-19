@@ -69,7 +69,7 @@ namespace StringUtilTestNS
         }
 
         [TestMethod]
-        public void IndexOf_IndexPlusSubTextLengthIsMoreThanTextLength_ShouldThrowIndexOutOfRangeException()
+        public void IndexOf_IndexPlusSubTextLengthIsMoreThanTextLength_ShouldReturnNegOne()
         {
             //arrange
             string text = "Polly put the kettle on, polly put the kettle on, polly put the kettle on we'll all have tea";
